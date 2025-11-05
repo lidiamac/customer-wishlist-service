@@ -7,5 +7,6 @@ import java.util.Optional;
 public interface WishlistRepository {
     Optional<Wishlist> findByCustomerId(String customerId);
     Wishlist save(Wishlist wishlist);
+    Boolean existsByCustomerIdAndItemsProductId(String customerId, Long productId);
 
 }

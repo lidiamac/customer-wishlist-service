@@ -32,4 +32,9 @@ public class WishlistRepositoryImpl implements WishlistRepository {
         return savedDocument.toDomain();
     }
 
+    @Override
+    public Boolean existsByCustomerIdAndItemsProductId(String customerId, Long productId) {
+        return mongoWishlistRepository.existsByCustomerIdAndItemsProductId(customerId, productId);
+    }
+
 }
