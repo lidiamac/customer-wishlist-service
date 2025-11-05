@@ -1,6 +1,7 @@
 package com.ecommerce.customer.wishlist.domain;
 
 import com.ecommerce.customer.wishlist.domain.exceptions.ProductAlreadyExistsException;
+import com.ecommerce.customer.wishlist.domain.exceptions.ProductNotFoundException;
 import com.ecommerce.customer.wishlist.domain.exceptions.WishlistLimitExceededException;
 
 import java.time.LocalDateTime;
@@ -8,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.ecommerce.customer.wishlist.domain.constants.WishlistMessages.*;
+import static com.ecommerce.customer.wishlist.domain.constants.WishlistMessages.PRODUCT_NOT_FOUND;
 import static java.lang.String.format;
 import static java.time.LocalDateTime.now;
 import static java.util.Optional.ofNullable;
@@ -41,6 +43,16 @@ public class Wishlist {
         this.items.add(product);
         this.updatedAt = now();
 
+    }
+
+    public void removeProduct(Long productId){
+        boolean removed = this.items.removeIf(item -> item.productId().equals(productId));
+
+        if (!removed) {
+            throw new ProductNotFoundException(format(PRODUCT_NOT_FOUND, productId, this.customerId)
+            );
+        }
+        this.updatedAt = now();
     }
 
     private boolean containsProduct(Long productId) {

@@ -31,7 +31,7 @@ class AddProductToWishlistUseCaseTest {
     private final String CUSTOMER_ID = "65b8c387b9e7a20c3a8d1f2e";
     private final Long PRODUCT_ID = 1579758L;
     private final Long ANOTHER_PRODUCT_ID = 8475945L;
-    private final String ERROR_MESSAGE = "ERROR";
+    private final String ANY_ERROR_MESSAGE = "ERROR";
 
 
 
@@ -95,7 +95,7 @@ class AddProductToWishlistUseCaseTest {
 
         when(wishlistRepository.findByCustomerId(CUSTOMER_ID)).thenReturn(Optional.of(wishlist));
 
-        doThrow(new ProductAlreadyExistsException(ERROR_MESSAGE))
+        doThrow(new ProductAlreadyExistsException(ANY_ERROR_MESSAGE))
                 .when(wishlist)
                 .addProduct(any(ProductItem.class));
 
