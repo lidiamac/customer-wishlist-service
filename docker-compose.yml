@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   mongo:
     image: mongo:6
@@ -11,7 +9,7 @@ services:
 
   api:
     build: .
-    container_name: wishlist-api
+    container_name: customer-wishlist-service
     ports:
       - "8080:8080"
     environment:

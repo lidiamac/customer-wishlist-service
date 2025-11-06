@@ -34,13 +34,14 @@ public class Wishlist {
     }
 
     public void addProduct(ProductItem product){
-        if(this.items.size() >= MAX_ITEMS){
-            throw new WishlistLimitExceededException(WISHLIST_LIMIT_EXCEEDED);
-        }
         if(containsProduct(product.productId())) {
             throw new ProductAlreadyExistsException(format(PRODUCT_ALREADY_EXISTS, product.productId(), this.customerId));
         }
 
+        if(this.items.size() >= MAX_ITEMS){
+            throw new WishlistLimitExceededException(WISHLIST_LIMIT_EXCEEDED);
+        }
+        
         this.items.add(product);
         this.updatedAt = now();
 
