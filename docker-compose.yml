@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  mongo:
+    image: mongo:6
+    container_name: wishlist-mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  api:
+    build: .
+    container_name: wishlist-api
+    ports:
+      - "8080:8080"
+    environment:
+      MONGODB_URI: mongodb://mongo:27017
+      MONGODB_DATABASE: wishlist-db
+    depends_on:
+      - mongo
+
+volumes:
+  mongo_data:
