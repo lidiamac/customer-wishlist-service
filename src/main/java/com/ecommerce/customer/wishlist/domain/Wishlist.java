@@ -12,6 +12,7 @@ import static com.ecommerce.customer.wishlist.domain.constants.WishlistMessages.
 import static com.ecommerce.customer.wishlist.domain.constants.WishlistMessages.PRODUCT_NOT_FOUND;
 import static java.lang.String.format;
 import static java.time.LocalDateTime.now;
+import static java.util.Objects.nonNull;
 import static java.util.Optional.ofNullable;
 
 public class Wishlist {
@@ -24,8 +25,8 @@ public class Wishlist {
     public Wishlist(String customerId, List<ProductItem> items, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.customerId = customerId;
         this.items = ofNullable(items).orElse(new ArrayList<>());
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
+        this.createdAt = nonNull(createdAt) ? createdAt : now();
+        this.updatedAt = nonNull(updatedAt) ? updatedAt : now();
     }
 
     public Wishlist(String customerId) {

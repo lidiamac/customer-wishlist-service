@@ -58,7 +58,6 @@ class WishlistControllerTest {
     private static final String BASE_URL = "/wishlist";
     private final String CUSTOMER_ID = "65b8c387b9e7a20c3a8d1f2e";
     private final Long PRODUCT_ID = 1579758L;
-    private final Long OTHER_PRODUCT_ID = 8475945L;
 
     @BeforeEach
     void setup() {
@@ -189,8 +188,10 @@ class WishlistControllerTest {
 
     @Test
     void shouldReturnWishlist_whenRetrieveAll_givenValidCustomerId() throws Exception {
+        var ANOTHER_PRODUCT_ID = 8475945L;
+
         var item1 = new ProductItem(PRODUCT_ID);
-        var item2 = new ProductItem(OTHER_PRODUCT_ID);
+        var item2 = new ProductItem(ANOTHER_PRODUCT_ID);
         var response = new WishlistResponse(CUSTOMER_ID, List.of(item1, item2), now(), now());
 
         when(retrieveAllUseCase.execute(CUSTOMER_ID)).thenReturn(response);
@@ -199,7 +200,7 @@ class WishlistControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.customerId").value(CUSTOMER_ID))
                 .andExpect(jsonPath("$.items[0].productId").value(PRODUCT_ID))
-                .andExpect(jsonPath("$.items[1].productId").value(OTHER_PRODUCT_ID));
+                .andExpect(jsonPath("$.items[1].productId").value(ANOTHER_PRODUCT_ID));
     }
 
     @Test
