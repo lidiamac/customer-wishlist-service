@@ -51,31 +51,45 @@ A aplicação segue os princípios da **Clean Architecture**.
 ---
 
 # 🚀 Como Rodar o Projeto
+Este projeto pode ser executado localmente ou via Docker/Docker Compose.
+
+## 📝 Requisitos para Rodar o Projeto
+
+Para garantir que o projeto funcione corretamente, verifique se você possui os seguintes requisitos instalados e configurados:
+
+### 1. Para execução local
+- **Java 21** ou superior instalado
+- **Maven 3.6+** instalado
+- **MongoDB** rodando localmente na porta padrão `27017`
+- Conexão configurada no `application.properties`.
+
+### 2. Para execução via Docker / Docker Compose
+- **Docker** instalado (versão 20+ recomendada)
+- **Docker Compose** instalado (versão 1.29+ recomendada)
+- Nenhuma instalação adicional de Java ou MongoDB é necessária, pois os containers cuidarão do ambiente
+
 
 ## 1. Clonar o repositório
-
-```bash
 git clone https://github.com/lidiamac/customer-wishlist-service.git
 cd customer-wishlist-service
-```
 
-## 2. Configurar o MongoDB
-
-```
-spring.data.mongodb.uri=mongodb://localhost:27017/wishlist
-```
-
-## 3. Executar a aplicação
-
-```bash
+## 2. Executar localmente
+Rodar a aplicação:
 mvn spring-boot:run
-```
 
 A API ficará disponível em:
-
-```
 http://localhost:8080
-```
+
+## 3. Executar via Docker
+Rodar com Docker Compose:
+docker-compose up --build
+
+A API estará disponível em:
+http://localhost:8080
+
+## Observações
+- A API pode ser testada tanto localmente quanto via Docker.
+
 
 ---
 
@@ -167,20 +181,20 @@ Exemplo de resposta:
 ```
 src/main/java/com/ecommerce/customer/wishlist/
 │
-├── domain
+├── 📁domain
 │   ├── Wishlist.java
 │   ├── ProductItem.java
-│   └── exceptions/
+│   └── 📁exceptions
 │
-├── application
-│   ├── usecases/
-│   ├── repository/
-│   └── dto/
+├── 📁application
+│   ├── 📁usecases
+│   ├── 📁repository
+│   └── 📁dto
 │
-└── infrastructure
-    ├── controller/
-    ├── repository/
-    └── document/
+└── 📁infrastructure
+    ├── 📁controller
+    ├── 📁repository
+    └── 📁document
 ```
 
 ---
