@@ -23,6 +23,6 @@ public class AddProductToWishlistUseCase {
 
             wishlist.addProduct(new ProductItem(request.productId()));
             wishlistRepository.save(wishlist);
-            return new ProductResponse(request.productId(), true);
+            return new ProductResponse(request.productId());
         }
     }
