@@ -1,0 +1,78 @@
+{
+  "info": {
+    "name": "Wishlist API",
+    "_postman_id": "a1f9c84e-1234-4567-89aa-wishlist-api",
+    "description": "Collection para testar todos os endpoints da Wishlist",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Adicionar produto à wishlist",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/wishlist/{{customerId}}/products",
+          "host": ["{{base_url}}"],
+          "path": ["wishlist", "{{customerId}}", "products"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"productId\": 815181898999\n}"
+        }
+      }
+    },
+    {
+      "name": "Remover produto da wishlist",
+      "request": {
+        "method": "DELETE",
+        "url": {
+          "raw": "{{base_url}}/wishlist/{{customerId}}/products/{{productId}}",
+          "host": ["{{base_url}}"],
+          "path": ["wishlist", "{{customerId}}", "products", "{{productId}}"]
+        }
+      }
+    },
+    {
+      "name": "Consultar se produto está na wishlist",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{base_url}}/wishlist/{{customerId}}/products/{{productId}}",
+          "host": ["{{base_url}}"],
+          "path": ["wishlist", "{{customerId}}", "products", "{{productId}}"]
+        }
+      }
+    },
+    {
+      "name": "Buscar todos os produtos da wishlist",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{base_url}}/wishlist/{{customerId}}",
+          "host": ["{{base_url}}"],
+          "path": ["wishlist", "{{customerId}}"]
+        }
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8080"
+    },
+    {
+      "key": "customerId",
+      "value": "1a9f3c7e4b12d89a0f3e5691"
+    },
+    {
+      "key": "productId",
+      "value": "815181898999"
+    }
+  ]
+}
