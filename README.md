@@ -42,8 +42,6 @@ A aplicação segue os princípios da **Clean Architecture**.
 ## 🧠 Decisões Importantes
 
 - O **customerId é o próprio `_id` do documento** no MongoDB.  
-- A wishlist **só existe quando contém itens**.  
-  - Ao remover o último item, o documento é excluído.  
 - O domínio impõe:
   - Limite de **20 produtos**
   - Produto não pode ser duplicado  
@@ -161,9 +159,6 @@ Exemplo de resposta:
 - Limite de **20 produtos**
 - Produto **não pode ser duplicado**
 - `productId` **não pode ser nulo**
-- Wishlist **não existe quando vazia**
-- Último item removido → wishlist **apagada**
-- Consultar wishlist inexistente → **404 Not Found**
 
 ---
 
@@ -193,7 +188,8 @@ src/main/java/com/ecommerce/customer/wishlist/
 # 🔮 Melhorias Futuras
 - Cache com Redis  
 - Paginação nos itens 
-- Logs 
+- Logs
+- Excluir wishlist quando a listagem de itens está vazia
 
 ---
 
