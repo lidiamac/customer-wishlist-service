@@ -2,9 +2,11 @@ package com.ecommerce.customer.wishlist.infraestructure.controller;
 
 import com.ecommerce.customer.wishlist.application.dto.request.AddProductRequest;
 import com.ecommerce.customer.wishlist.application.dto.response.ProductResponse;
+import com.ecommerce.customer.wishlist.application.dto.response.WishlistResponse;
 import com.ecommerce.customer.wishlist.application.usecases.AddProductToWishlistUseCase;
 import com.ecommerce.customer.wishlist.application.usecases.CheckProductInWishlistUseCase;
 import com.ecommerce.customer.wishlist.application.usecases.RemoveProductFromWishlistUseCase;
+import com.ecommerce.customer.wishlist.application.usecases.RetrieveAllWishlistUseCase;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -20,12 +22,15 @@ public class WishlistController {
     private final AddProductToWishlistUseCase addProductToWishlist;
     private final RemoveProductFromWishlistUseCase removeProductFromWishlist;
     private final CheckProductInWishlistUseCase checkProductInWishlist;
+    private final RetrieveAllWishlistUseCase retrieveAllWishlist;
 
 
-    public WishlistController(AddProductToWishlistUseCase addProductToWishlist, RemoveProductFromWishlistUseCase removeProductFromWishlist, CheckProductInWishlistUseCase checkProductInWishlist) {
+
+    public WishlistController(AddProductToWishlistUseCase addProductToWishlist, RemoveProductFromWishlistUseCase removeProductFromWishlist, CheckProductInWishlistUseCase checkProductInWishlist, RetrieveAllWishlistUseCase retrieveAllWishlist) {
         this.addProductToWishlist = addProductToWishlist;
         this.removeProductFromWishlist = removeProductFromWishlist;
         this.checkProductInWishlist = checkProductInWishlist;
+        this.retrieveAllWishlist = retrieveAllWishlist;
     }
 
     @PostMapping("/{customerId}/products")
@@ -50,6 +55,13 @@ public class WishlistController {
                                                           @PathVariable Long productId) {
 
         var response = checkProductInWishlist.execute(customerId, productId);
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/{customerId}")
+    public ResponseEntity<WishlistResponse> retrieveAllWishlist(@PathVariable String customerId) {
+
+        var response = retrieveAllWishlist.execute(customerId);
         return ResponseEntity.ok(response);
     }
 
